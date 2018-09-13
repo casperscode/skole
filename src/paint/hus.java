@@ -327,16 +327,14 @@ public class hus extends Application{
 			double[] arrX = stepsX.stream().mapToDouble(Double::doubleValue).toArray(); //via method reference
 			double[] arrY = stepsY.stream().mapToDouble(Double::doubleValue).toArray(); //identity function, Java unboxes automatically to get the double value
 			
-				
 			int n = stepsX.size();
 			Arrays.toString(arrX);
 			Arrays.toString(arrY);
 			
+			gc.setLineWidth(3);
 			gc.setStroke(Color.WHITE);
 			gc.strokePolyline(arrX, arrY, n);
 			gc.stroke();
-
-			System.out.println(Arrays.toString(arrX));
 		});
 		
 		Button b7 = new Button("Gem");
@@ -407,9 +405,8 @@ public class hus extends Application{
 		GridPane.setConstraints(b6, 6, 7);
 		
 		//TEST//
-		CubicCurve curv1 = new CubicCurve();
-		
-		
+		//CubicCurve curv1 = new CubicCurve();
+			
 		
 		menu.setMinWidth(300);
 		menu.getChildren().addAll(b1, b2, b3, b4, b6, l1, l2, l3, l4, c1, c2, c3, c4, t1, t2, t3, t4, t5, t6, f1, f2, f3, f4, lbl);
@@ -418,15 +415,7 @@ public class hus extends Application{
 		menu2.setPadding(new Insets(10,10,10,10));
 		menu2.setSpacing(8);
 		
-		//Settings
-		TextField setFill = new TextField();
-		setFill.setMaxWidth(100);
-		setFill.setPromptText("Vælg fylde farve");
-		
-		TextField setLine = new TextField();
-		setFill.setMaxWidth(100);
-		setFill.setPromptText("Vælg linje farve");
-					
+		//Settings				
 		Label lineLabel = new Label("Linje farve");
 		lineLabel.setFont(new Font("Bold Courier New", 14));
 		Label cbLabel = new Label("fylde farve");
@@ -476,7 +465,7 @@ public class hus extends Application{
             }
         });
 				
-		
+		window.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -496,7 +485,10 @@ public class hus extends Application{
 	}
 
 	public void ny() {
+		gc = null;
+		gc = canvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, 720, 700);
+		
 	}
 
 }

@@ -36,10 +36,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.imageio.ImageIO;
-
-//import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,6 +49,14 @@ public class hus extends Application{
 
 	Stage window;
 	
+	int WSIZE_W = 1366;
+	int WSIZE_H = 720;
+	int CSIZE_W = 800;
+	int CSIZE_H = 720;
+		
+//	double nSX = window.getWidth();
+//	double nSY = window.getHeight();
+	
 	Rectangle rect1;
 	Polygon poly1;
 	Ellipse cirk1;
@@ -58,19 +64,21 @@ public class hus extends Application{
 	GraphicsContext gc;
 	ColorPicker cpl = new ColorPicker();
 	ColorPicker cpf = new ColorPicker();
-	Canvas canvas = new Canvas(720, 700);
+	Canvas canvas = new Canvas(CSIZE_W, CSIZE_H);
 	Pane pane;
+	Scene scene;
 	
 	List<Double> stepsX = new ArrayList<>();
 	List<Double> stepsY = new ArrayList<>();
+	List<Double> log = new ArrayList<>(); 
 	
-	
-	
-	//private final LinkedList<Point2D> centers = new LinkedList<>();
-	int oCnt = -1;
-	
-	int lc = 0;
 	int thick = 1;
+	double x1;
+	double y1;
+	double x2;
+	double y2;
+	
+	String temp;
 	
 	Color stroke;
 	Color fill;
@@ -82,15 +90,11 @@ public class hus extends Application{
 	public void start(Stage primaryStage) {
 		window = primaryStage;
 		window.setTitle("Paint v. 0.000001");
-				
-		stroke = Color.BLACK;
-		fill = Color.CORNFLOWERBLUE;
-		
-		
+						
 		pane = new Pane();
 		pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		pane.setPadding(new Insets(20,20,20,20));
-		pane.setPrefSize(720, 700);
+		pane.setPrefSize(CSIZE_W, CSIZE_H);
 		pane.setBorder(createBorder());
 		
 		
@@ -202,7 +206,6 @@ public class hus extends Application{
 			gc.strokeLine(x1, y1, x2, y2);
 			gc.stroke();
 					
-			oCnt++;
 			
 			l1.clear();
 			l2.clear();
@@ -231,12 +234,10 @@ public class hus extends Application{
 				gc.fillOval(x, y, r, r2);
 				gc.strokeOval(x, y, r, r2);
 				gc.stroke();
-				oCnt++;
 			}
 			else {
 				gc.strokeOval(x, y, r, r2);
 				gc.stroke();
-				oCnt++;
 			}
 																				
 			c1.clear();
@@ -269,11 +270,9 @@ public class hus extends Application{
 			if(cpf.getValue() != Color.BLACK) {
 				gc.fillPolygon(new double[]{x1, x2, x3}, new double[]{y1, y2, y3}, 3);
 				gc.strokePolygon(new double[]{x1, x2, x3}, new double[]{y1, y2, y3}, 3);
-				oCnt++;
 			}
 			else {
 				gc.strokePolygon(new double[]{x1, x2, x3}, new double[]{y1, y2, y3}, 3);
-				oCnt++;
 			}
 			
 			t1.clear();
@@ -288,7 +287,6 @@ public class hus extends Application{
 		b4.setMinWidth(110);
 		b4.setOnAction(e -> {
 			
-			oCnt++;
 			int x;
 			int y;
 			int l;
@@ -316,9 +314,8 @@ public class hus extends Application{
 			f4.clear();
 		});
 		
-		Button b5 = new Button("Ny");
-		b5.setMinWidth(50);
-		b5.setOnAction(e ->	ny());
+		MenuItem ny = new MenuItem("Ny");
+		ny.setOnAction(e ->	ny() );
 		
 		Button b6 = new Button("Undo");
 		b6.setMinWidth(50);
@@ -335,38 +332,10 @@ public class hus extends Application{
 			gc.setStroke(Color.WHITE);
 			gc.strokePolyline(arrX, arrY, n);
 			gc.stroke();
+			gc.setStroke(cpl.getValue());
 		});
 		
-		Button b7 = new Button("Gem");
-		b7.setPrefWidth(70);
-		b7.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();
-                 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilter = 
-                        new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-                fileChooser.getExtensionFilters().add(extFilter);
-               
-                //Show save file dialog
-                File file = fileChooser.showSaveDialog(primaryStage);
-                 
-                if(file != null){
-                    try {
-                        WritableImage writableImage = new WritableImage(720, 700);
-                        canvas.snapshot(null, writableImage);
-                        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-                        ImageIO.write(renderedImage, "png", file);
-                    } catch (IOException ex) {
-                        Logger.getLogger(hus.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-             
-        });
-		
+				
 		//Grid arrangement
 		GridPane.setConstraints(lbl, 0, 0);
 		
@@ -401,19 +370,100 @@ public class hus extends Application{
 		GridPane.setConstraints(f4, 3, 4);
 		
 		//Knapper
-		GridPane.setConstraints(b5, 6, 6);
+		//GridPane.setConstraints(b5, 6, 6);
 		GridPane.setConstraints(b6, 6, 7);
+		GridPane.setConstraints(cpl, 2, 6);
 		
 		//TEST//
 		//CubicCurve curv1 = new CubicCurve();
-			
+		
+		
 		
 		menu.setMinWidth(300);
-		menu.getChildren().addAll(b1, b2, b3, b4, b6, l1, l2, l3, l4, c1, c2, c3, c4, t1, t2, t3, t4, t5, t6, f1, f2, f3, f4, lbl);
-				
+		menu.getChildren().addAll(b1, b2, b3, b4, b6, l1, l2, l3, l4, c1, c2, c3, c4, t1, t2, t3, t4, t5, t6, f1, f2, f3, f4, lbl, cpl);
+		
+		/*
 		HBox menu2 = new HBox();
 		menu2.setPadding(new Insets(10,10,10,10));
 		menu2.setSpacing(8);
+		*/
+		
+		VBox tMenu = new VBox();
+		tMenu.setAlignment(Pos.TOP_LEFT);
+		tMenu.setMaxWidth(500);
+		
+		
+		
+		
+		MenuItem colorP = new MenuItem();
+		colorP.setText("Colorpicker");
+		colorP.setOnAction(e -> cP());
+		
+		MenuItem exit = new MenuItem();
+		exit.setText("Exit");
+		exit.setOnAction(e -> {
+			Platform.exit();
+		});
+		
+		
+		MenuItem circ = new MenuItem();
+		circ.setText("Cirkel");
+		circ.setOnAction(e -> {
+		   		
+			canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, 
+	                new EventHandler<MouseEvent>(){
+
+	            @Override
+	            public void handle(MouseEvent event) {
+	            		scene.setOnMousePressed(e -> {
+	            			x1 = e.getSceneX();
+	                		y1 = e.getSceneY();
+	                		//gc.setLineWidth(1.5);
+	                		gc.beginPath();
+	                		//gc.strokeOval(x, y, w, h);
+	                		//gc.stroke();
+	                		stepsX.add(e.getSceneX()-490);
+	                		stepsY.add(e.getSceneY()-24);
+	            		});
+						
+	            		scene.setOnMouseReleased(e -> {
+	            			x2 = x1-(e.getSceneX()/2);
+	                		y2 = y1-(e.getSceneY()/2);
+	                		gc.setLineWidth(1.5);
+	                		//gc.beginPath();
+	                		gc.strokeOval(x1, y1, x2, y2);
+	                		gc.stroke();
+	                		stepsX.add(e.getSceneX()-490);
+	                		stepsY.add(e.getSceneY()-24);
+	            		});
+					
+	            }
+	        });
+			
+		});
+		
+		MenuItem save = new MenuItem();
+		save.setText("Save");
+		save.setOnAction(e -> { save();	});
+		//Top menu
+		Menu menuF = new Menu();
+		menuF.setText("File");
+		menuF.getItems().addAll(ny, save, exit);
+		
+		Menu menuO1 = new Menu();
+		menuF.setText("File");
+		//menuO.setOnAction();			
+		ChoiceBox<String> menuO = new ChoiceBox<>();
+		
+		menuO.getItems().add("Streg");
+		menuO.getItems().add("Firkant");
+		menuO.getItems().add("Cirkel");
+		menuO.getItems().add("Trekant");
+		menuO.setValue("Streg");
+		menuO.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> temp = newValue );
+		
+				
+		tMenu.getChildren().add(menuO);
 		
 		//Settings				
 		Label lineLabel = new Label("Linje farve");
@@ -421,18 +471,16 @@ public class hus extends Application{
 		Label cbLabel = new Label("fylde farve");
 		cbLabel.setFont(new Font("Bold Courier New", 14));
 			
-		menu2.getChildren().addAll(lineLabel, cpl, cbLabel, cpf, b7, b5);
 		
 		BorderPane bPane = new BorderPane();
-		bPane.setTop(null);
-		bPane.setBottom(menu2);
+		bPane.setTop(tMenu);
+		bPane.setBottom(null);
 		bPane.setLeft(menu);
 		bPane.setCenter(pane);
 		bPane.setRight(null);
 		
-		
 		pane.getChildren().add(canvas);
-		Scene scene = new Scene(bPane, 1200, 750);
+		scene = new Scene(bPane, WSIZE_W, WSIZE_H);
 		
 		//Mus
 		canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, 
@@ -441,33 +489,30 @@ public class hus extends Application{
             @Override
             public void handle(MouseEvent event) {
             	scene.setOnMousePressed(e -> {
+            		
+            		gc.setLineWidth(1.5);
 					gc.beginPath();
-					gc.lineTo(e.getSceneX()-490, e.getSceneY());
+					gc.lineTo(e.getSceneX()-490, e.getSceneY()-24);
 					gc.stroke();
 					stepsX.add(e.getSceneX()-490);
-					stepsY.add(e.getSceneY());
+					stepsY.add(e.getSceneY()-24);
 				});
 					
 				scene.setOnMouseDragged(e -> {
+					gc.setLineWidth(1.5);
 					//gc.beginPath();
-					gc.lineTo(e.getSceneX()-490, e.getSceneY());
+					gc.lineTo(e.getSceneX()-490, e.getSceneY()-24);
 					gc.stroke();
 					stepsX.add(e.getSceneX()-490);
-					stepsY.add(e.getSceneY());
+					stepsY.add(e.getSceneY()-24);
 				});
 				
-				
-				scene.setOnMouseReleased(e -> {
-					
-				});
-				
-				oCnt++;
             }
         });
 				
 		window.setResizable(false);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		window.setScene(scene);
+		window.show();
 	}
 	
 	public static void main(String[] args) {
@@ -484,11 +529,45 @@ public class hus extends Application{
 	    return new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(BORDER_RADIUS), BorderStroke.THIN));
 	}
 
+	
+	//Nyt Canvas funktion
 	public void ny() {
 		gc = null;
 		gc = canvas.getGraphicsContext2D();
-		gc.clearRect(0, 0, 720, 700);
+		gc.clearRect(0, 0, CSIZE_W, CSIZE_H);
 		
+	}
+	
+	
+	//Save funktion
+	public void save() {
+		FileChooser fileChooser = new FileChooser();
+        
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = 
+                new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+       
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(window);
+         
+        if(file != null){
+            try {
+                WritableImage writableImage = new WritableImage(CSIZE_W, CSIZE_H);
+                canvas.snapshot(null, writableImage);
+                RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                ImageIO.write(renderedImage, "png", file);
+            } catch (IOException ex) {
+                Logger.getLogger(hus.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+	}
+	
+	//colorPicker funktion
+	public void cP() {
+		cpl.setOnAction(e -> {
+			gc.setStroke(cpl.getValue());
+		});
 	}
 
 }

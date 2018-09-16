@@ -7,7 +7,7 @@ public class printerApp {
 		printer kopi = new printer();
 		kopi.insertPaper(20);
 		System.out.println("Number of pages in printer: " + kopi.getPaperCount());
-		kopi.makeCopy(7);
+		kopi.makeCopy(5);
 		System.out.println("Number of pages in printer: " + kopi.getPaperCount());
 	}
 

@@ -7,6 +7,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.effect.Light.Point;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -26,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import java.util.logging.Logger;
+import java.awt.MouseInfo;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +40,8 @@ import java.util.logging.Level;
 import javax.imageio.ImageIO;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,8 +55,8 @@ public class husTest extends Application{
 	
 	int WSIZE_W = 1366;
 	int WSIZE_H = 720;
-	int CSIZE_W = 800;
-	int CSIZE_H = 720;
+	int CSIZE_W = 1366-565;
+	int CSIZE_H = 720-25;
 		
 //	double nSX = window.getWidth();
 //	double nSY = window.getHeight();
@@ -68,9 +72,16 @@ public class husTest extends Application{
 	Pane pane;
 	Scene scene;
 	
+	
 	List<Double> stepsX = new ArrayList<>();
 	List<Double> stepsY = new ArrayList<>();
 	List<Double> log = new ArrayList<>(); 
+	
+	
+	StringProperty xOut;
+	StringProperty yOut;
+	StringProperty xOuts;
+	StringProperty yOuts;
 	
 	int thick = 1;
 	double x1;
@@ -115,9 +126,14 @@ public class husTest extends Application{
 		menu.setHgap(10);
 		menu.setPadding(new Insets(10,10,10,10));
 		
+		
+		//Labels
 		Label lbl = new Label();
 		lbl.setText("PAINT");
 		lbl.setFont(Font.font("Courier", 18));
+		
+		
+		
 		
 		//Linje
 		TextField l1 = new TextField();
@@ -368,11 +384,20 @@ public class husTest extends Application{
 		GridPane.setConstraints(f2, 1, 4);
 		GridPane.setConstraints(f3, 2, 4);
 		GridPane.setConstraints(f4, 3, 4);
+	
+		
+		Label xOutl = new Label();
+		xOutl.textProperty().bind(xOut);
+		
+		Label yOutl = new Label();
+		yOutl.textProperty().bind(yOut);
 		
 		//Knapper
 		//GridPane.setConstraints(b5, 6, 6);
 		GridPane.setConstraints(b6, 6, 7);
 		GridPane.setConstraints(cpl, 2, 6);
+		GridPane.setConstraints(xOutl, 2, 8);
+		GridPane.setConstraints(yOutl, 4, 8);
 		
 		//TEST//
 		//CubicCurve curv1 = new CubicCurve();
@@ -489,26 +514,46 @@ public class husTest extends Application{
 
             @Override
             public void handle(MouseEvent event) {
-            	scene.setOnMousePressed(e -> {
-            		
-            		x1 = e.getSceneX();
-            		y1 = e.getSceneY();
-
-            		gc.setLineWidth(1.5);
-					gc.beginPath();
-					gc.lineTo(e.getSceneX()-490, e.getSceneY()-24);
-					gc.stroke();
-					stepsX.add(e.getSceneX()-490);
-					stepsY.add(e.getSceneY()-24);
+            		scene.setOnMousePressed(new EventHandler<>() { public void handle (MouseEvent mouseEvent) {
+            		System.out.println("X: " + mouseEvent.getX() + " Y: " + mouseEvent.getY());
+            		}
+            	            	
 				});
-					
-				scene.setOnMouseDragged(e -> {
-					
-					x2 = (e.getSceneX() - x1);
-            		y2 = (e.getSceneY() - x2);
+				
+            		scene.setOnMouseDragged(new EventHandler<>() { public void handle (MouseEvent mouseEvent) {
+            			double x = mouseEvent.getX();
+            			String x1 = Double.toString(x);
+            			double y = mouseEvent.getX();
+            			String y1 = Double.toString(y);
+            			
+                		xOuts = new SimpleStringProperty((String) x1);
+                		yOuts = new SimpleStringProperty((String) y1);
+                		
+            			}
+            		});
+            	
+            	scene.setOnMouseDragged(e -> {
+            		            		
+            		
+            		x2 = ((e.getSceneX() - 490));
+            		y2 = ((e.getSceneY() - 24));
 					gc.setLineWidth(1.5);
 					gc.strokeOval(x1, y1, x2, y2);
+					
+            	});
+            	
+            	
+				scene.setOnMouseReleased(e -> {
+										
+					gc = null;
+					gc = canvas.getGraphicsContext2D();
+					x2 = ((e.getSceneX()-490) - x1);
+            		y2 = ((e.getSceneY()-24) - y1);
+					gc.setLineWidth(1);
+					gc.strokeOval(x1, y1, x2, y2);
 					gc.stroke();
+					System.out.println(x2);
+					System.out.println(y2);
 					stepsX.add(e.getSceneX()-490);
 					stepsY.add(e.getSceneY()-24);
 				});

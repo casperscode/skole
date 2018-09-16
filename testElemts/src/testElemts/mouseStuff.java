@@ -67,17 +67,19 @@ public class mouseStuff extends Application {
 	
 	Pane pane = new Pane();
 	Canvas canvas = new Canvas();
-	Scene scene;
+	Scene scene, scene2;
 	BorderPane bPane = new BorderPane();;
 	MenuBar vBox1 = new MenuBar();
 	HBox hBox = new HBox();
 	Menu file = new Menu("File");
 	Menu help = new Menu("Help");
+	Menu options = new Menu("Options");
 	MenuItem new1 = new MenuItem();
 	MenuItem open = new MenuItem();
 	MenuItem save = new MenuItem();
 	MenuItem exit = new MenuItem();
 	MenuItem about = new MenuItem();
+	MenuItem color = new MenuItem();
 	SeparatorMenuItem space = new SeparatorMenuItem();
 	SeparatorMenuItem space2 = new SeparatorMenuItem();
 	Label xcord = new Label("X-Coordinate");
@@ -188,7 +190,8 @@ public class mouseStuff extends Application {
 		save.setOnAction(e -> save());
 		exit.setText("Exit");
 		exit.setOnAction(e -> Platform.exit());
-		
+		color.setText("Options");
+		color.setOnAction(e -> window.setScene(scene2));
 		about.setText("About");
 		
 		

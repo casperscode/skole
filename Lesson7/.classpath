@@ -8,6 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="printer"/>
 	<classpathentry kind="src" path="Child"/>
-	<classpathentry kind="src" path="Excercise51_55"/>
+	<classpathentry kind="src" path="Excercise501_519"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

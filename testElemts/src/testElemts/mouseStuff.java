@@ -12,6 +12,7 @@ import javax.management.monitor.Monitor;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -55,8 +56,8 @@ import javafx.stage.Stage;
 
 public class mouseStuff extends Application {
 
-	int SIZE_W;
-	int SIZE_H;
+	int SIZE_W = 600;
+	int SIZE_H = 600;
 	int CSIZE_W;
 	int CSIZE_H;
 	
@@ -66,7 +67,7 @@ public class mouseStuff extends Application {
 	Stage window;
 	
 	Pane pane = new Pane();
-	Canvas canvas = new Canvas();
+	Canvas canvas = new Canvas(600, 600);
 	Scene scene, scene2;
 	BorderPane bPane = new BorderPane();;
 	MenuBar vBox1 = new MenuBar();
@@ -100,36 +101,28 @@ public class mouseStuff extends Application {
 		window = stage;
 		window.setTitle("mouse stuff");
 		
-		SIZE_W = 600;
-		SIZE_H = 600;
-		canvas.setWidth(600);
-		canvas.setHeight(600);
-		
-		//img = /res/BG.png;
-		//pane.setBackground(new Background(new BackgroundImage(BG.png, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null)));
 		
 		gc = canvas.getGraphicsContext2D();
+		gc.setStroke(Color.BLACK);
 		
+		cp.setValue(Color.BLACK);
 		cp.setOnAction(e -> {
 			gc.setStroke(cp.getValue());
 		}); 
 		
-		
+	  
 		window.widthProperty().addListener(new ChangeListener<Number>() {
-		    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-		        System.out.println("Width: " + newSceneWidth);
-		        CSIZE_W = (int) observableValue.getValue();
-		        SIZE_W = (int) observableValue.getValue();
-		        System.out.println(observableValue);
+		    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {		        
+		        CSIZE_W = (observableValue.getValue().intValue());
+		        canvas.setWidth(CSIZE_W);
 		    }
 		});
 		
+	    
 		window.heightProperty().addListener(new ChangeListener<Number>() {
 		    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-		        System.out.println("Height: " + newSceneHeight);
-		        CSIZE_H = (int) observableValue.getValue();
-		        SIZE_H = (int) observableValue.getValue();
-		        System.out.println(observableValue);
+		        CSIZE_H = (observableValue.getValue().intValue());
+		        canvas.setHeight(CSIZE_H);
 		    }
 		});
 		
@@ -140,8 +133,7 @@ public class mouseStuff extends Application {
 		vBox1.setPadding(new Insets(0,0,0,0));
 		
 		
-		//bPane.addEventHandler();
-		
+				
 		bPane.addEventHandler(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
@@ -150,9 +142,7 @@ public class mouseStuff extends Application {
             	}
             });
 		
-		
 		canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-
             @Override
             public void handle(MouseEvent event) {
             	scene.setOnMousePressed(e -> {
@@ -185,7 +175,7 @@ public class mouseStuff extends Application {
 		new1.setText("New");
 		new1.setOnAction(e -> ny());
 		open.setText("Open");
-		open.setOnAction((final ActionEvent e) -> openF());
+		//open.setOnAction((final ActionEvent e) -> openF());
 		save.setText("Save");
 		save.setOnAction(e -> save());
 		exit.setText("Exit");
@@ -193,6 +183,7 @@ public class mouseStuff extends Application {
 		color.setText("Options");
 		color.setOnAction(e -> window.setScene(scene2));
 		about.setText("About");
+		about.setOnAction(e -> aboutBox.display());
 		
 		
 		help.getItems().addAll(about);
@@ -212,7 +203,7 @@ public class mouseStuff extends Application {
 	//Main
 	public static void main(String[] args) { launch(args); }
 	
-	
+	/*
 	public void openF()	{
         File file = fileChooser.showOpenDialog(window);
         if (file != null) {
@@ -228,6 +219,7 @@ public class mouseStuff extends Application {
         }
         
     }
+	*/
 	
 	public void save() {
 		FileChooser fileChooser = new FileChooser();

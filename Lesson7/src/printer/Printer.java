@@ -3,16 +3,16 @@ package printer;
 import java.util.Random;
 
 
-public class printer {
+public class Printer {
 	
 	private int paperCount;
 	
 	boolean paperStuck = false;
 	
-	public void Printer() {
+	public Printer() {
 		paperCount = 0;
 	}
-	public void Printer(int paperCount) {
+	public Printer(int paperCount) {
 		paperCount = this.paperCount;
 	}
 	

@@ -1,9 +1,9 @@
-package sep10ex2;
+package child;
 
 public class cApp {
 
 	public static void main(String[] args) {
-		Child cas = new Child(9,true);
+		Child cas = new Child(19,true);
 		System.out.println(cas.institution());
 		System.out.println(cas.gender());
 		System.out.println(cas.team());

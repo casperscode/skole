@@ -1,6 +1,6 @@
 package Ex5;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Excercise5_16 {
 

@@ -6,8 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="printer"/>
-	<classpathentry kind="src" path="Child"/>
-	<classpathentry kind="src" path="Excercise501_519"/>
+	<classpathentry excluding="printer/|Child/|Excercise501_519/|src/" kind="src" path=""/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

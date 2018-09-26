@@ -1,4 +1,4 @@
-package sep10ex2;
+package child;
 
 public class Child
 {

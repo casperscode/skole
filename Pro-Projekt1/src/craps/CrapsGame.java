@@ -24,13 +24,14 @@ public class CrapsGame {
 	    			System.out.println("");
 	    			System.out.println("Play again? y/n");
     				answer = scanner.nextLine();
+    				
     				if(answer.equals("y")) {
     					goal = 0;
     					first = true;
     					play();
-    				}
-    				if(answer.equals("n"))
+    				}else
     					break;
+    				
         		}	
 	    		if (thrower.sum() == 2 || thrower.sum() == 3 || thrower.sum() == 12) {
 	    			printGameLost();
@@ -39,13 +40,14 @@ public class CrapsGame {
 	    			first = true;
 	    			System.out.println("Play again? y/n");
     				answer = scanner.nextLine();
+    				
     				if(answer.equals("y")) {
     					goal = 0;
     					first = true;
     					play();
-    				}
-    				if(answer.equals("n"))
+    				}else
     					break;
+    				
 	    		}
 	    		first = false;
     		}
@@ -57,26 +59,27 @@ public class CrapsGame {
     				System.out.println("");
     				System.out.println("Play again? y/n");
     				answer = scanner.nextLine();
+    				
     				if(answer.equals("y")) {
     					goal = 0;
     					first = true;
     					play();
-    				}
-    				if(answer.equals("n"))
+    				}else
     					break;
+    				
     				
     			}else if (thrower.sum() == 7) {
     				printGameLost();
     				System.out.println("");
     				System.out.println("Play again? y/n");
     				answer = scanner.nextLine();
+    				
     				if(answer.equals("y")) {
     					goal = 0;
     					first = true;
     					play();
-    				}
-    				if(answer.equals("n"))
-    					break;
+    				}else
+    					break;				
     			}
     		}
     	}   		   		

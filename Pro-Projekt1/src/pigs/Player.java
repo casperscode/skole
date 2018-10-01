@@ -3,22 +3,12 @@ package pigs;
 public class Player {
 	
 	private String pName;
-	private String answer;
+	private int totalPoints;
 	
-	
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
 
 	public String getpName() {
 		return pName;
 	}
-
-	private int totalPoints;
 	
 	public int getTotalPoints() {
 		return totalPoints;

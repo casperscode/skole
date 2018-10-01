@@ -18,9 +18,8 @@ public class pigsGame {
 	
 	public pigsGame() {
 		System.out.println("Do you want to play the to something else than 100 points? y/n");
-		GV = scan.nextLine();
 		
-		if (GV.equals("y")) {
+		if (scan.nextLine().equalsIgnoreCase("y")) {
 			System.out.println("Enter the amount of points required to win");
 			gameScore = scan.nextInt();
 		}else {
@@ -35,7 +34,6 @@ public class pigsGame {
 		p1 = new Player(p1name);
 		p2 = new Player(p2name);
 		die = new Die();
-		
 	}
 	
 	public void run() {
@@ -48,6 +46,7 @@ public class pigsGame {
 						
 				if(die.getFaceValue() == 1) {
 					p1.updateTotal(0);
+					turnThrow = 0;
 					token = false;
 					System.out.println("You rolled a 1 and loose your yurn. Press enter to continue..");
 					cont = scan2.nextLine();
@@ -59,8 +58,7 @@ public class pigsGame {
 				if(turnThrow >= gameScore)
 					p1.updateTotal(turnThrow);
 					
-				System.out.println("You have "+turnThrow+" points so far");
-				System.out.println("Player "+p1.getpName() +" rolled: "+die.getFaceValue());
+				System.out.println("Player "+p1.getpName() +" rolled: "+die.getFaceValue()+". You have "+turnThrow+" points so far");
 				System.out.println("The score is [ "+p1.getpName()+" : "+p1.getTotalPoints()+" ] [ "+p2.getpName()+" : "+p2.getTotalPoints()+" ]");
 				System.out.println("Roll again? [y/n]");
 				
@@ -85,6 +83,7 @@ public class pigsGame {
 						
 				if(die.getFaceValue() == 1) {
 					p2.updateTotal(0);
+					turnThrow = 0;
 					token = true;
 					System.out.println("You rolled a 1 and loose your yurn. Press enter to continue..");
 					cont = scan2.nextLine();
@@ -96,8 +95,7 @@ public class pigsGame {
 				if(turnThrow >= gameScore)
 					p2.updateTotal(turnThrow);
 				
-				System.out.println("You have "+turnThrow+" points so far");
-				System.out.println("Player "+p2.getpName() +" rolled: "+die.getFaceValue());
+				System.out.println("Player "+p2.getpName() +" rolled: "+die.getFaceValue()+". You have "+turnThrow+" points so far");
 				System.out.println("The score is [ "+p1.getpName()+" : "+p1.getTotalPoints()+" ] [ "+p2.getpName()+" : "+p2.getTotalPoints()+" ]");
 				System.out.println("Roll again? [y/n]");
 				

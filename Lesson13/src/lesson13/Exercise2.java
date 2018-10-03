@@ -1,4 +1,4 @@
-package lessen13;
+package lesson13;
 
 public class Exercise2 {
 

@@ -1,15 +1,14 @@
-package lessen13;
+package lesson13;
 
 import java.util.Arrays;
 
-public class Exercise4 {
+public class Exercise3 {
 
 	public static void main(String[] args) {
 		int[] iAr1 = {4,6,7,2,3,2,6};
-		int[] iAr2 = {1,5,7,3,9,8};
+		int[] iAr2 = {4,6,7,2,3,5};
 		double[] dAr1 = {4.3,6,7,2,3,2.4,6};
 		double[] dAr2 = {4.9,6,7.8,2,3,5.7};
-		System.out.println("Array holds even number(s) : "+hasUneven(iAr2));
 		System.out.println("Integer array sum : "+Arrays.toString(sumArrays(iAr1,iAr2)));
 		System.out.println("Double array sum : "+Arrays.toString(sumArrays(dAr1,dAr2)));
 	}
@@ -56,17 +55,6 @@ public class Exercise4 {
             }
         }
         return aSum;
-	}
-	
-	public static boolean hasUneven(int[] t) {
-		boolean even = false;
-		
-		for(int i = 0; i < t.length; i++) {
-			if(t[i] % 2 == 0)
-				even = true;
-		}
-		
-		return even;
 	}
 
 }

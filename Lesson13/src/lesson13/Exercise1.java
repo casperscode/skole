@@ -42,7 +42,15 @@ public class Exercise1 {
 		
 		int[] arrayH = new int[10];
 		for(int i = 0; i < 10; i++) {
-			arrayH[i] = i-(i*i);
+			int count = 0;
+			
+			if( i == 0) {
+				arrayH[i] = 0;
+			}else if(i % 2 == 0) {
+				arrayH[i] += count+1;
+			}else { 
+				arrayH[i] += count+3;
+			}
 		}
 		
 		System.out.println(Arrays.toString(arrayA));

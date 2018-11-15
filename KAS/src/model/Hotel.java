@@ -8,7 +8,8 @@ public class Hotel {
 	private double pris;
 	private double prisDouble;
 	private final ArrayList<ExtraService> services = new ArrayList<>();
-
+	private final ArrayList<Konference> konferencer = new ArrayList<>();
+	
 	public Hotel(String navn, String adresse, double pris, double prisDouble) {
 		this.navn = navn;
 		this.adresse = adresse;

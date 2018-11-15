@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class Konference {
 
@@ -10,10 +11,10 @@ public class Konference {
 	private static LocalDate startDato;
 	private static LocalDate slutDato;
 	private static String navn;
-//	private static final ArrayList<Arrangør> Konferencer = new ArrayList<>();
-//	private static final ArrayList<Hotel> Hoteller = new ArrayList<>();
+//	private static final ArrayList<Arrangï¿½r> Konferencer = new ArrayList<>();
+	private static final ArrayList<Hotel> Hoteller = new ArrayList<>();
 //	private static final ArrayList<Udflugt> Udflugter = new ArrayList<>();
-//	private static final ArrayList<Deltager> Deltagere = new ArrayList<>();
+	private static final ArrayList<Deltager> Deltagere = new ArrayList<>();
 
 	public Konference(String navn, String lokation, LocalDate startDato, LocalDate slutDato, int pris ) {
 		Pre.require(pris >= 0);

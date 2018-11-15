@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="460.0" style="-fx-background-image: url('file:C:\Users\Casper\Documents\BG.jpg'); -fx-background-position: center center; -fx-background-repeat: stretch;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#369effc8" height="116.0" layoutX="15.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="431.0" />
+      <CheckBox fx:id="cb5" layoutX="366.0" layoutY="102.0" mnemonicParsing="false" text="Hold" />
+      <CheckBox fx:id="cb4" layoutX="281.0" layoutY="102.0" mnemonicParsing="false" text="Hold" />
+      <CheckBox fx:id="cb3" layoutX="197.0" layoutY="102.0" mnemonicParsing="false" text="Hold" />
+      <CheckBox fx:id="cb2" layoutX="113.0" layoutY="102.0" mnemonicParsing="false" text="Hold" />
+      <CheckBox fx:id="cb1" layoutX="28.0" layoutY="102.0" mnemonicParsing="false" text="Hold" />
+      <Button fx:id="button" defaultButton="true" layoutX="282.0" layoutY="141.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="151.0" text="THROW">
+         <font>
+            <Font name="Courier New Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="167.0" layoutY="602.0" text="Total" />
+      <TextField fx:id="tfTotal" layoutX="210.0" layoutY="598.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfLastSum" layoutX="210.0" layoutY="565.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="168.0" layoutY="570.0" text="Sum" />
+      <Label layoutX="29.0" layoutY="569.0" text="Yatzy" />
+      <TextField fx:id="tfYatzy" layoutX="100.0" layoutY="565.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfChance" layoutX="100.0" layoutY="537.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="29.0" layoutY="541.0" text="Chance" />
+      <Label layoutX="29.0" layoutY="513.0" text="Large str" />
+      <TextField fx:id="tfLarge" layoutX="100.0" layoutY="509.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfSmall" layoutX="100.0" layoutY="481.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="29.0" layoutY="485.0" text="Small str" />
+      <Label layoutX="29.0" layoutY="457.0" text="Full House" />
+      <TextField fx:id="tfFullHouse" layoutX="100.0" layoutY="453.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfFourSame" layoutX="100.0" layoutY="425.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="29.0" layoutY="429.0" text="Four-same" />
+      <Label layoutX="29.0" layoutY="401.0" text="Three-same" />
+      <TextField fx:id="tfThreeSame" layoutX="100.0" layoutY="397.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfTwoPair" layoutX="100.0" layoutY="369.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="29.0" layoutY="373.0" text="Two pairs" />
+      <Label layoutX="166.0" layoutY="312.0" text="Bonus" />
+      <TextField fx:id="tfBonus" layoutX="210.0" layoutY="309.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="50.0" layoutY="256.0" text="5's" />
+      <TextField fx:id="tfFive" layoutX="100.0" layoutY="251.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfSix" layoutX="100.0" layoutY="279.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="51.0" layoutY="282.0" text="6's" />
+      <Label layoutX="29.0" layoutY="345.0" text="One Pair" />
+      <TextField fx:id="tfOnePair" layoutX="100.0" layoutY="341.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfFirstSum" layoutX="210.0" layoutY="280.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="167.0" layoutY="285.0" text="Sum" />
+      <Label layoutX="50.0" layoutY="200.0" text="3's" />
+      <TextField fx:id="tfThree" layoutX="100.0" layoutY="195.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfFour" layoutX="100.0" layoutY="223.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="50.0" layoutY="228.0" text="4's" />
+      <Label layoutX="50.0" layoutY="171.0" text="2's" />
+      <TextField fx:id="tfTwo" layoutX="100.0" layoutY="167.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <TextField fx:id="tfOne" layoutX="100.0" layoutY="139.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: ffee9e; -fx-border-color: 000000; -fx-border-style: solid;" />
+      <Label layoutX="51.0" layoutY="143.0" text="1's" />
+      <TextField fx:id="tfD1" alignment="TOP_CENTER" editable="false" layoutX="27.0" layoutY="27.0" pickOnBounds="false" prefHeight="70.0" prefWidth="70.0" promptText="0">
+         <font>
+            <Font name="Courier New Bold" size="37.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfD2" alignment="TOP_CENTER" editable="false" layoutX="112.0" layoutY="27.0" pickOnBounds="false" prefHeight="70.0" prefWidth="70.0" promptText="0">
+         <font>
+            <Font name="Courier New Bold" size="37.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfD3" alignment="TOP_CENTER" editable="false" layoutX="196.0" layoutY="27.0" pickOnBounds="false" prefHeight="70.0" prefWidth="70.0" promptText="0">
+         <font>
+            <Font name="Courier New Bold" size="37.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfD4" alignment="TOP_CENTER" editable="false" layoutX="280.0" layoutY="27.0" pickOnBounds="false" prefHeight="70.0" prefWidth="70.0" promptText="0">
+         <font>
+            <Font name="Courier New Bold" size="37.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfD5" alignment="TOP_CENTER" editable="false" layoutX="365.0" layoutY="27.0" pickOnBounds="false" prefHeight="70.0" prefWidth="70.0" promptText="0">
+         <font>
+            <Font name="Courier New Bold" size="37.0" />
+         </font>
+      </TextField>
+      <Label layoutX="158.0" layoutY="158.0" text="Throw Count:" />
+      <Label fx:id="lTC" layoutX="233.0" layoutY="159.0" text="X" />
+      <Line endX="340.0" layoutX="110.0" layoutY="338.0" startX="-100.0" strokeType="OUTSIDE" strokeWidth="0.8" />
+      <Line endY="385.0" layoutX="96.0" layoutY="245.0" startY="-109.0" />
+      <Line endX="340.0" layoutX="110.0" layoutY="595.0" startX="-100.0" strokeType="OUTSIDE" strokeWidth="0.8" />
+      <Line endX="340.0" layoutX="110.0" layoutY="136.0" startX="-100.0" strokeType="OUTSIDE" strokeWidth="0.8" />
+   </children>
+</Pane>

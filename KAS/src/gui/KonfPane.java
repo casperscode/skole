@@ -5,6 +5,7 @@ import storage.Storage;
 import controller.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -24,7 +25,7 @@ public class KonfPane extends GridPane {
 	private final TextField txfAdress = new TextField();
 	private final TextField txfDato = new TextField();
 	private final TextArea txaExtraService = new TextArea();
-	private final ListView<Konference> lvwKonferencer = new ListView<>();
+	private static final ListView<Konference> lvwKonferencer = new ListView<>();
 
 	public KonfPane() {
 		this.setPadding(new Insets(20));
@@ -58,10 +59,6 @@ public class KonfPane extends GridPane {
 		ChangeListener<Konference> listener = (ov, oldA, newA) -> this.selectedKonfRediger();
 		this.lvwKonferencer.getSelectionModel().selectedItemProperty().addListener(listener);
 		
-		Konference HavogHimmel = new Konference("Hav og Himmel", "Odense Universitet", LocalDate.of(2018, 11, 27),
-				LocalDate.of(2018, 11, 29), 1500);
-		lvwKonferencer.getItems().addAll(controller.getKonferencer());
-		
 		// felter til konference pane
 
 		this.add(this.txfHotelName, 2, 1);
@@ -85,7 +82,7 @@ public class KonfPane extends GridPane {
 		hbxButtons.setPadding(new Insets(10, 0, 0, 0));
 		hbxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
-		Button btnAddParticipant = new Button("Tilføj");
+		Button btnAddParticipant = new Button("TilfÃ¸j");
 		hbxButtons.getChildren().add(btnAddParticipant);
 		btnAddParticipant.setOnAction(event -> this.addAction());
 
@@ -103,7 +100,9 @@ public class KonfPane extends GridPane {
 	// ----------------------------------------------------------- \\
 
 	public void addAction() {
+		System.out.println(Storage.getKonferencer());
 		KonfVindue konfVindue = new KonfVindue("Opret Konference");
+		System.out.println(Storage.getKonferencer());
 		konfVindue.showAndWait();
 	}
 
@@ -111,6 +110,13 @@ public class KonfPane extends GridPane {
 		this.updateControls();
 	}
 
+	public static void updateList(ArrayList<Konference> view) {
+	//	System.out.println(view);
+//		lvwKonferencer.getItems().clear();
+//		lvwKonferencer.getItems().addAll(0, view);
+		lvwKonferencer.getItems().addAll(Storage.getKonferencer());
+	}
+	
 	public void updateControls() {
 		Konference ar1 = this.lvwKonferencer.getSelectionModel().getSelectedItem();
 		if (ar1 != null) {

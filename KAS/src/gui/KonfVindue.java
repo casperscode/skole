@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class KonfVindue extends Stage {
+	
 	private Konference konference;
 	private DatePicker datePickerIn;
 	private DatePicker datePickerOut;
@@ -35,14 +36,15 @@ public class KonfVindue extends Stage {
 		GridPane pane = new GridPane();
 		this.initContent(pane);
 
-		Scene scene = new Scene(pane, 300, 220);
+		Scene scene = new Scene(pane, 300, 250);
 		this.setScene(scene);
 	}
-
+	
 	public KonfVindue(String title) {
 		this(title, null);
 	}
 
+	
 	// -------------------------------------------------------------------------
 
 	private final TextField txfNavn = new TextField();
@@ -105,7 +107,8 @@ public class KonfVindue extends Stage {
 		btnOK.setOnAction(event -> this.okAction());
 		
 
-		pane.add(this.lblErrorNavn, 0, 5);
+		//pane.add(this.lblErrorNavn, 0, 5);
+		pane.add(lblErrorNavn, 0, 5, 4, 1);
 		this.lblErrorNavn.setStyle("-fx-text-fill: red");
 		pane.add(this.lblErrorAdresse, 0, 5);
 		this.lblErrorAdresse.setStyle("-fx-text-fill: red");
@@ -142,7 +145,7 @@ public class KonfVindue extends Stage {
 
 		// Name of Company is empty
 		if (konferenceNavn.length() == 0) {
-			this.lblErrorNavn.setText("Name is empty");
+			this.lblErrorNavn.setText("Manglende navn");
 			return;
 		} else if (konferenceNavn.length() >= 1) {
 			this.lblErrorNavn.setVisible(false);
@@ -150,7 +153,7 @@ public class KonfVindue extends Stage {
 
 		// Adress of Company is empty
 		if (konferenceAdresse.length() == 0) {
-			this.lblErrorAdresse.setText("Adress is empty");
+			this.lblErrorAdresse.setText("Manglende adresse");
 			return;
 		} else if (konferenceAdresse.length() >= 1) {
 			this.lblErrorAdresse.setVisible(false);
@@ -175,7 +178,7 @@ public class KonfVindue extends Stage {
 		}
 
 		if (this.konference != null) {
-			controller.redigerKonference(this.konference, konferenceNavn, konferenceAdresse, konferenceStartDato, konferenceSlutDato, konferencePris);
+			//controller.redigerKonference(this.konference, konferenceNavn, konferenceAdresse, konferenceStartDato, konferenceSlutDato, konferencePris);
 		} else {
 			controller.opretKonference(konferenceNavn, konferenceAdresse, konferenceStartDato, konferenceSlutDato, konferencePris);
 			

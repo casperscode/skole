@@ -3,13 +3,13 @@ package model;
 import storage.Storage;
 import model.Konference;
 
-public class Arrangør {
+public class ArrangÃ¸r {
 	
 	private String navn;
 	private Konference konf;
 	private String adresse;
 
-	public Arrangør(String navn, Konference konf) {
+	public ArrangÃ¸r(String navn, Konference konf) {
 		this.navn = navn;
 		this.konf = konf;
 	}

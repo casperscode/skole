@@ -16,15 +16,15 @@ public class Storage {
 	
 	public static ArrayList<Konference> getKonferencer() {
 		return new ArrayList<Konference>(Konferencer);
-	}
+	} 
 	
 	public static void addKonference(Konference konference) {
 		Konferencer.add(konference);
 	}
 	
-	public static void removeKonference(Konference konference) {	
-		Konferencer.remove(konference);
-	}
+//	public static void removeKonference(Konference konference) {	
+//		Konferencer.remove(konference);
+//	}
 	
 	public static ArrayList<Hotel> getHoteller() {
 		return new ArrayList<Hotel>(Hoteller);
@@ -58,7 +58,7 @@ public class Storage {
 		Deltagere.add(deltager);
 	}
 	
-	public static void removeDeltager(Udflugt deltager) {
+	public static void removeDeltager(Deltager deltager) {
 		Deltagere.remove(deltager);
 	}
 	

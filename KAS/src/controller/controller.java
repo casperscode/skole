@@ -8,6 +8,7 @@ import model.ExtraService;
 import model.Konference;
 import model.Pre;
 import model.Udflugt;
+import gui.KonfPane;
 import storage.Storage;
 
 public class controller {
@@ -43,7 +44,6 @@ public class controller {
 		}
 
 		return samletpris;
-
 	}
 	
 	public static Konference redigerKonference(Konference konference, String konferenceNavn, String konferenceAdresse, LocalDate konferenceStartDato, LocalDate konferenceSlutDato, int konferencePris) {
@@ -53,8 +53,10 @@ public class controller {
 	
 	public static Konference opretKonference(String navn, String lokation, LocalDate startDato, LocalDate slutDato, int pris) {
 		Konference konference = new Konference(navn, lokation, startDato, slutDato, pris);
+		System.out.println(Storage.getKonferencer());
 		Storage.addKonference(konference);
-		// company
+		System.out.println(Storage.getKonferencer());
+		KonfPane.updateList(Storage.getKonferencer());
 		return konference;
 	}
 	

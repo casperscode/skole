@@ -75,7 +75,7 @@ public class HotelPane extends GridPane {
 		hbxButtons.setPadding(new Insets(10, 0, 0, 0));
 		hbxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
-		Button btnAddParticipant = new Button("Tilføj");
+		Button btnAddParticipant = new Button("Tilfï¿½j");
 		hbxButtons.getChildren().add(btnAddParticipant);
 		btnAddParticipant.setOnAction(event -> this.addAction());
 
@@ -93,7 +93,7 @@ public class HotelPane extends GridPane {
 	// ----------------------------------------------------------- \\
 
 	public void addAction() {
-		HotelVindue hotelVindue = new HotelVindue("Tilføj Hotel");
+		HotelVindue hotelVindue = new HotelVindue("Tilfï¿½j Hotel");
 		hotelVindue.showAndWait();
 	}
 
